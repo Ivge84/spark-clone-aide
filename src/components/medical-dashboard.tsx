@@ -1,9 +1,15 @@
-import { Activity, Heart, Thermometer, Users, Calendar, MessageSquare } from "lucide-react";
+import { Activity, Heart, Thermometer, Users, Calendar, MessageSquare, Video, Phone, ChevronDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { StatCard } from "@/components/ui/stat-card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface Appointment {
   id: string;
@@ -106,10 +112,29 @@ export function MedicalDashboard() {
               Your personal health monitoring center
             </p>
           </div>
-          <Button size="lg" className="bg-gradient-primary shadow-medical">
-            <MessageSquare className="mr-2 h-5 w-5" />
-            Contact Care Team
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="lg" className="bg-gradient-primary shadow-medical">
+                <Users className="mr-2 h-5 w-5" />
+                Contact Care Team
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuItem className="cursor-pointer">
+                <MessageSquare className="mr-2 h-4 w-4" />
+                <span>Start Chat</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <Video className="mr-2 h-4 w-4" />
+                <span>Video Call</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <Phone className="mr-2 h-4 w-4" />
+                <span>Voice Call</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Vital Signs */}
@@ -226,20 +251,24 @@ export function MedicalDashboard() {
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Button variant="outline" className="h-20 flex-col space-y-2">
                 <Activity className="h-6 w-6" />
                 <span>Log Vitals</span>
               </Button>
               <Button variant="outline" className="h-20 flex-col space-y-2">
                 <MessageSquare className="h-6 w-6" />
-                <span>Message Team</span>
+                <span>Chat</span>
+              </Button>
+              <Button variant="outline" className="h-20 flex-col space-y-2">
+                <Video className="h-6 w-6" />
+                <span>Video Call</span>
               </Button>
               <Button variant="outline" className="h-20 flex-col space-y-2">
                 <Calendar className="h-6 w-6" />
                 <span>Book Appointment</span>
               </Button>
-              <Button variant="outline" className="h-20 flex-col space-y-2">
+              <Button variant="outline" className="h-20 flex-col space-y-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground">
                 <Heart className="h-6 w-6" />
                 <span>Emergency</span>
               </Button>
