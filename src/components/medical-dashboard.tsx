@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { StatCard } from "@/components/ui/stat-card";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +31,8 @@ interface VitalSign {
 }
 
 export function MedicalDashboard() {
+  const [activeTab, setActiveTab] = useState<"my-bp" | "healthjourney" | "messages" | "journal">("my-bp");
+  
   const appointments: Appointment[] = [
     {
       id: "1",
@@ -103,6 +106,8 @@ export function MedicalDashboard() {
       <div className="mx-auto max-w-7xl space-y-8 p-6">
         
         {/* Header */}
+        {activeTab === "my-bp" && (
+        <>
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-foreground">
@@ -275,6 +280,114 @@ export function MedicalDashboard() {
             </div>
           </CardContent>
         </Card>
+        </>
+        )}
+
+        {/* Healthjourney View */}
+        {activeTab === "healthjourney" && (
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold text-foreground">Hälsoresa</h1>
+            <Card className="shadow-card-soft">
+              <CardHeader>
+                <CardTitle>Din Hälsohistorik</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border">
+                    <div>
+                      <p className="font-medium">Blodtrycksmätning</p>
+                      <p className="text-sm text-muted-foreground">15 jan 2025 - 142/89 mmHg</p>
+                    </div>
+                    <Badge variant="secondary">Förhöjt</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border">
+                    <div>
+                      <p className="font-medium">Viktmätning</p>
+                      <p className="text-sm text-muted-foreground">14 jan 2025 - 78.5 kg</p>
+                    </div>
+                    <Badge>Normal</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border">
+                    <div>
+                      <p className="font-medium">Konsultation</p>
+                      <p className="text-sm text-muted-foreground">10 jan 2025 - Dr. Sarah Johnson</p>
+                    </div>
+                    <Badge>Genomförd</Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Messages View */}
+        {activeTab === "messages" && (
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold text-foreground">Meddelanden</h1>
+            <Card className="shadow-card-soft">
+              <CardHeader>
+                <CardTitle>Konversationer</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3 p-4 rounded-lg bg-muted/30 border border-border hover:shadow-card-soft transition-all cursor-pointer">
+                    <Avatar className="h-12 w-12">
+                      <AvatarFallback className="bg-primary text-primary-foreground">SJ</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <p className="font-semibold">Dr. Sarah Johnson</p>
+                      <p className="text-sm text-muted-foreground">Dina blodtrycksvärden ser bättre ut...</p>
+                    </div>
+                    <Badge>2</Badge>
+                  </div>
+                  <div className="flex items-center space-x-3 p-4 rounded-lg bg-muted/30 border border-border hover:shadow-card-soft transition-all cursor-pointer">
+                    <Avatar className="h-12 w-12">
+                      <AvatarFallback className="bg-primary text-primary-foreground">AB</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <p className="font-semibold">Nurse Anna Berg</p>
+                      <p className="text-sm text-muted-foreground">Påminnelse om uppföljning imorgon</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Journal View */}
+        {activeTab === "journal" && (
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold text-foreground">Hälsodagbok</h1>
+            <Card className="shadow-card-soft">
+              <CardHeader>
+                <CardTitle>Mina Anteckningar</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button className="w-full bg-gradient-primary">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Ny Anteckning
+                </Button>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-lg bg-muted/30 border border-border">
+                    <div className="flex justify-between items-start mb-2">
+                      <p className="font-medium">Kände mig yr på morgonen</p>
+                      <span className="text-xs text-muted-foreground">15 jan</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">Blodtrycket var 145/92. Behöver diskutera med läkaren vid nästa besök.</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-muted/30 border border-border">
+                    <div className="flex justify-between items-start mb-2">
+                      <p className="font-medium">Promenad i parken</p>
+                      <span className="text-xs text-muted-foreground">14 jan</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">30 minuter promenad. Känns bra med regelbunden motion.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
       </div>
 
@@ -282,19 +395,39 @@ export function MedicalDashboard() {
       <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg animate-slide-up">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex items-center justify-around py-3">
-            <button className="flex flex-col items-center space-y-1 text-primary hover:text-primary/80 transition-colors">
+            <button 
+              onClick={() => setActiveTab("my-bp")}
+              className={`flex flex-col items-center space-y-1 transition-colors ${
+                activeTab === "my-bp" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
               <Heart className="h-6 w-6" />
               <span className="text-xs font-medium">My BP</span>
             </button>
-            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+            <button 
+              onClick={() => setActiveTab("healthjourney")}
+              className={`flex flex-col items-center space-y-1 transition-colors ${
+                activeTab === "healthjourney" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
               <Activity className="h-6 w-6" />
               <span className="text-xs font-medium">Healthjourney</span>
             </button>
-            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+            <button 
+              onClick={() => setActiveTab("messages")}
+              className={`flex flex-col items-center space-y-1 transition-colors ${
+                activeTab === "messages" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
               <MessageSquare className="h-6 w-6" />
               <span className="text-xs font-medium">Messages</span>
             </button>
-            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+            <button 
+              onClick={() => setActiveTab("journal")}
+              className={`flex flex-col items-center space-y-1 transition-colors ${
+                activeTab === "journal" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
               <FileText className="h-6 w-6" />
               <span className="text-xs font-medium">Journal</span>
             </button>
