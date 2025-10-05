@@ -1,4 +1,4 @@
-import { Activity, Heart, Thermometer, Users, Calendar, MessageSquare, Video, Phone, ChevronDown } from "lucide-react";
+import { Activity, Heart, Thermometer, Users, Calendar, MessageSquare, Video, Phone, ChevronDown, BarChart3, Upload, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -99,8 +99,8 @@ export function MedicalDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-medical p-6 animate-fade-in">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <div className="min-h-screen bg-medical pb-24 animate-fade-in">
+      <div className="mx-auto max-w-7xl space-y-8 p-6">
         
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -276,6 +276,34 @@ export function MedicalDashboard() {
           </CardContent>
         </Card>
 
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg animate-slide-up">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex items-center justify-around py-3">
+            <button className="flex flex-col items-center space-y-1 text-primary hover:text-primary/80 transition-colors">
+              <Heart className="h-6 w-6" />
+              <span className="text-xs font-medium">Read BP</span>
+            </button>
+            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+              <BarChart3 className="h-6 w-6" />
+              <span className="text-xs font-medium">History</span>
+            </button>
+            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+              <Upload className="h-6 w-6" />
+              <span className="text-xs font-medium">Export</span>
+            </button>
+            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+              <MessageSquare className="h-6 w-6" />
+              <span className="text-xs font-medium">Messages</span>
+            </button>
+            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
+              <FileText className="h-6 w-6" />
+              <span className="text-xs font-medium">Journal</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
