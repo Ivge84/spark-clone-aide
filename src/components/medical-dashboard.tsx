@@ -284,15 +284,11 @@ export function MedicalDashboard() {
           <div className="flex items-center justify-around py-3">
             <button className="flex flex-col items-center space-y-1 text-primary hover:text-primary/80 transition-colors">
               <Heart className="h-6 w-6" />
-              <span className="text-xs font-medium">Read BP</span>
+              <span className="text-xs font-medium">My BP</span>
             </button>
             <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
-              <BarChart3 className="h-6 w-6" />
-              <span className="text-xs font-medium">History</span>
-            </button>
-            <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
-              <Upload className="h-6 w-6" />
-              <span className="text-xs font-medium">Export</span>
+              <Activity className="h-6 w-6" />
+              <span className="text-xs font-medium">Healthjourney</span>
             </button>
             <button className="flex flex-col items-center space-y-1 text-muted-foreground hover:text-foreground transition-colors">
               <MessageSquare className="h-6 w-6" />
